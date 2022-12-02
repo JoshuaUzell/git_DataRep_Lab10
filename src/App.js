@@ -14,6 +14,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import { Edit } from './components/edit'; //Imports edit
 
 class App extends React.Component {
   render() {
@@ -34,6 +35,9 @@ class App extends React.Component {
         <Route path='/' element={<Content></Content>}></Route>
         <Route path='/read' element={<Read></Read>}></Route>
         <Route path='/create' element={<Create></Create>}></Route>
+        
+        {/**Have a route for edit that takes in an id param */}
+        <Route path='/edit/:id' element={<Edit></Edit>}></Route> 
       </Routes>
         {/* <Header></Header>
         <Content></Content>
