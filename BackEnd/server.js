@@ -3,6 +3,8 @@ const app = express()
 const port = 4000
 var bodyParser = require('body-parser')
 
+//Server listens out for requests from the client
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -61,6 +63,7 @@ app.get('/api/book/:id', (req, res) => {
   })
 })
 
+//Listens for request coming in with a put method, finds a book with a certain id and updates the book
 app.put('/api/book/:id', (req, res) => {
   
   console.log('Update: ' + req.params.id)
@@ -71,6 +74,17 @@ app.put('/api/book/:id', (req, res) => {
     (error, data) => {
       res.send(data);
     })
+})
+
+//Listens for request coming in with a delete method with an endpoint passed in as a parameter
+app.delete('/api/book/:id', (req,res) => {
+  console.log('Deleting: ' + req.params.id); //Log to console saying deleting a certain book id
+  
+  //Go to database, find matching id and delete it
+  bookModel.findByIdAndDelete({_id:req.params.id}, (error,data)=>{ //passes in the id in the url and the callback function that executes after asynchronous operation
+      res.send(data); //Sends back the data  
+  }) 
+  
 })
 
 app.listen(port, () => {
